@@ -144,3 +144,17 @@ if($(window).width()<=640){
 }
 
 $(window).resize(function(){document.location.reload();})
+
+$('.view>p>a').on('click',function(evt){
+    evt.preventDefault();
+})
+
+$('section>article:nth-of-type(3)>div>a').on('click',function(evt){
+    evt.preventDefault();
+})
+$('section>article:nth-of-type(5)>div>div>a').on('click',function(evt){
+    evt.preventDefault();
+})
+$('footer>article>ul>li>a').on('click',function(evt){
+    evt.preventDefault();
+})
