@@ -24,7 +24,7 @@ $indicator.on('click',function(evt){
     
     nowIdx = $indicator.index(this);
     
-    $container.stop().animate({left:-(100*nowIdx)+'%'},400);/*얘가문제? */
+    $container.stop().animate({left:-(100*nowIdx)+'%'},400);
     $indicator.eq(nowIdx).parent().addClass('on').siblings().removeClass('on');
     
 });
@@ -32,40 +32,41 @@ $indicator.on('click',function(evt){
 $btnPrev.on('click', function(evt){
     evt.preventDefault();
     
-    // nowIdx = $indicator.index(this);
+    if(nowIdx>0){
+        nowIdx=0;
+    }else{
+        nowIdx=1;
+    }
+ 
+    $('.slides-container>li').last().prependTo($container);
+    $container.css({left:'-100%'});
+    
+    $indicator.eq(nowIdx).parent().addClass('on').siblings().removeClass('on');
     
     
     $container.stop().animate({
         left: 0
-    },400,function(){
-        if(nowIdx>0){
-            nowIdx=0;
-        }else{
-            nowIdx=1;
-        }
-        $container.children('li').last().prependTo($container);
-        $container.css('left','-100%');
-        
-        $indicator.eq(nowIdx).parent().addClass('on').siblings().removeClass('on');
-    });
+    },400);
 });
 
 
 $btnNext.on('click', function(evt){
     evt.preventDefault();
     
-    // nowIdx = $indicator.index(this);
+    if(nowIdx<1){
+        nowIdx=1;
+    }else{
+        nowIdx=0;
+    }
     
+    console.log(`nowIdx = ${nowIdx}`)
+
     $container.stop().animate({
-        left: '-200%'
+        left:'-100%'
     },400,function(){
-        if(nowIdx<1){
-            nowIdx=1;
-        }else{
-            nowIdx=0;
-        }
-        $container.children('li').first().appendTo($container);
-        $container.css('left','-100%');
+        $('.slides-container>li').first().appendTo($container);
+        $container.css({left:0});
+        
         $indicator.eq(nowIdx).parent().addClass('on').siblings().removeClass('on');
     });
 })
